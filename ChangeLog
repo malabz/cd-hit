@@ -1,6 +1,9 @@
 
 CD-HIT ChangeLog
 
+CD-HIT-V5.0 (2021-07-12) modified by wym6912:
+Now the program has the modules: cd-hit, cd-hit-est, cd-hit-454
+
 CD-HIT-V4.8.1 (2019-03-01):
 Add: support  .gz input files
 

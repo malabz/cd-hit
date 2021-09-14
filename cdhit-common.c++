@@ -84,7 +84,6 @@ int BLOSUM62[] = {
 //0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19  2  6 20
 };
 
-
 int na2idx[] = {0, 4, 1, 4, 4, 4, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4,
                 4, 4, 4, 3, 3, 4, 4, 4, 4, 4};
     // idx for  A  B  C  D  E  F  G  H  I  J  K  L  M  N  O  P
@@ -323,7 +322,7 @@ bool Options::SetOptions( int argc, char *argv[], bool twod, bool est )
 	n = strlen( date );
 	for(i=1; i<n; i++) if( date[i-1] == ' ' and date[i] == ' ' ) date[i] = '0';
 	printf( "================================================================\n" );
-	printf( "Program: CD-HIT, V" CDHIT_VERSION WITH_OPENMP ", %s, " __TIME__ "\n", date );
+	printf( "Program: CD-HIT, V" CDHIT_VERSION WITH_OPENMP ", %s, " __TIME__ " (modified by wym6912)\n", date );
 	printf( "Command:" );
 	n = 9;
 	for(i=0; i<argc; i++){
@@ -1526,13 +1525,16 @@ Sequence::Sequence( const Sequence & other, const Sequence & other2, int mode )
 		data = new char[size+1];
 		//printf( "data: %p  %p\n", data, other.data );
 		data[size] = 0;     
-                data[size_R2] = 0;  
-                memcpy( data, other2.data, size_R2); // copy R2 first
-                strrev( data );                      // reverse R2 on data
+        data[size_R2] = 0;  
+        memcpy( data, other2.data, size_R2); // copy R2 first
+        strrev( data );                      // reverse R2 on data
 		memcpy( data+size_R2, other.data, size-size_R2 ); // copy R1 to end of R2
+		data2 = new char[size + 1];
+		data2[size] = 0;
+		memcpy(data2, data, size);
 		//for (i=0; i<size; i++) data[i] = other.data[i];
 		des_begin2 = other2.des_begin;
-                tot_length2= other2.tot_length;
+        tot_length2 = other2.tot_length;
 	}
         else if ( other.data || other2.data ) {
                 bomb_error("Not both PE sequences have data");
@@ -1551,11 +1553,14 @@ Sequence::~Sequence()
 {
 	//printf( "delete: %p\n", this );
 	if( data ) delete[] data;
+	if( data2 ) delete[] data2;
 	if( identifier ) delete[] identifier;
 }
 
 void Sequence::Clear()
 {
+	// There is no need to free data, because we need data to print
+	return ;
 	if( data ) delete[] data;
 	/* do not set size to zero here, it is need for writing output */
 	bufsize = 0;
@@ -1613,8 +1618,10 @@ void Sequence::trim(int trim_len) {
 }
 void Sequence::ConvertBases()
 {
-	int i;
-	for(i=0; i<size; i++) data[i] = aa2idx[data[i] - 'A'];
+	data2 = new char[size + 1];
+	data2[size] = 0;
+	memcpy(data2, data, size);
+	for(int i=0; i<size; i++) data[i] = aa2idx[data[i] - 'A'];
 }
 
 void Sequence::Swap( Sequence & other )
@@ -1667,7 +1674,9 @@ void Sequence::PrintInfo( int id, FILE *fout, const Options & options, char *buf
 	const char *tag = options.isEST ? "nt" : "aa";
 	bool print = options.print != 0;
 	bool strand = options.isEST;
-	fprintf( fout, "%i\t%i%s, >%s...", id, size, tag, identifier+1 );
+	// fprintf( fout, "%i\t%i%s, >%s...", id, size, tag, identifier+1 );
+	fprintf( fout, "%s\n%s\n", identifier, data2 );
+	/*
 	if( identity ){
 		int *c = coverage;
 		fprintf( fout, " at " );
@@ -1679,6 +1688,7 @@ void Sequence::PrintInfo( int id, FILE *fout, const Options & options, char *buf
 	}else{
 		fprintf( fout, " *\n" );
 	}
+	*/
 }
 
 // by liwz gzip version 2019-02
@@ -2591,8 +2601,7 @@ void SequenceDB::WriteClusters( const char *db, const char *db_pe, const char *n
 
 void SequenceDB::WriteExtra1D( const Options & options )
 {
-	string db_clstr = options.output + ".clstr";
-	string db_clstr_bak = options.output + ".bak.clstr";
+	string db_clstr = options.output;
 	int i, i0, k, N = sequences.size();
 	vector<long long> sorting( N );
 	for (i=0; i<N; i++) sorting[i] = ((long long)sequences[i]->index << 32) | i;
@@ -2602,12 +2611,7 @@ void SequenceDB::WriteExtra1D( const Options & options )
 	char *buf = new char[ MAX_DES + 1 ];
 
 	if( options.backupFile ){
-		fout = fopen( db_clstr_bak.c_str(), "w+" );
-		for (i=0; i<N; i++) {
-			Sequence *seq = sequences[ sorting[i] & 0xffffffff ];
-			seq->PrintInfo( seq->cluster_id, fout, options, buf );
-		}
-		fclose( fout );
+		cout << "Not supported -bak in this program. Not backuped.\n" << endl;
 	}
 
 	cout << "writing clustering information" << endl;
@@ -2619,9 +2623,10 @@ void SequenceDB::WriteExtra1D( const Options & options )
 		clusters[id].Append( k );
 	}
 
-	fout = fopen( db_clstr.c_str(), "w+" );
+	// fout = fopen( db_clstr.c_str(), "w+" );
 
-        if (options.sort_output) {
+    if (options.sort_output) 
+	{
             int *clstr_size = new int[M];
             int *clstr_idx1 = new int[M];
 
@@ -2631,21 +2636,32 @@ void SequenceDB::WriteExtra1D( const Options & options )
             }
             quick_sort_idxr(clstr_size, clstr_idx1, 0, M-1);
 
-  	    for (i=0; i<M; i++) {
-                i0 = clstr_idx1[i];
-		fprintf( fout, ">Cluster %i\n", i );
-		for (k=0; k<(int)clusters[i0].size(); k++)
-			sequences[ clusters[i0][k] ]->PrintInfo( k, fout, options, buf );
-	    }   
-        }
-        else {
-  	    for (i=0; i<M; i++) {
-		fprintf( fout, ">Cluster %i\n", i );
-		for (k=0; k<(int)clusters[i].size(); k++)
-			sequences[ clusters[i][k] ]->PrintInfo( k, fout, options, buf );
-	    }   
+  	    for (i=0; i<M; i++) 
+		{
+			fout = fopen( (db_clstr + "_" + to_string(i) + ".clstr").c_str(), "w");
+            i0 = clstr_idx1[i];
+			// fprintf( fout, ">Cluster %i\n", i );
+			for (k=0; k<(int)clusters[i0].size(); k++) 
+			{
+				sequences[ clusters[i0][k] ]->PrintInfo( k, fout, options, buf );
+			}
+			fclose(fout);
+		}
+    }
+    else
+	{
+  	    for (i=0; i<M; i++)
+		{
+			fout = fopen( (db_clstr + "_" + to_string(i) + ".clstr").c_str(), "w");
+			// fprintf( fout, ">Cluster %i\n", i );
+			for (k=0; k<(int)clusters[i].size(); k++) 
+			{
+				sequences[ clusters[i][k] ]->PrintInfo( k, fout, options, buf );
+	  		} 
+			fclose(fout);
+		}  
 
-        }
+    }
 
 	delete []buf;
 }

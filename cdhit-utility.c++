@@ -6,7 +6,7 @@
 using namespace std;
 
 // information
-char cd_hit_ver[]  = "\t\t====== CD-HIT version " CDHIT_VERSION " (built on " __DATE__ ") ======";
+char cd_hit_ver[]  = "\t\t====== CD-HIT version " CDHIT_VERSION " (built on " __DATE__ ", modified by wym6912) ======";
 char cd_hit_ref1[] = "\"CD-HIT: a fast program for clustering and comparing large sets of protein or nucleotide sequences\", Weizhong Li & Adam Godzik. Bioinformatics, (2006) 22:1658-1659";
 char cd_hit_ref2[] = "\"CD-HIT: accelerated for clustering the next generation sequencing data\", Limin Fu, Beifang Niu, Zhengwei Zhu, Sitao Wu & Weizhong Li. Bioinformatics, (2012) 28:3150-3152";
 char cd_hit_ref3[] = "\"Beifang Niu, Limin Fu, Shulei Sun and Weizhong Li. Artificial and natural duplicates in pyrosequencing reads of metagenomic data. BMC Bioinformatics (2010) 11:187";
@@ -376,8 +376,7 @@ int print_usage_454 (char *arg)
   exit(1);
 }
 
-float current_time()
+double current_time()
 {
-	return ((float)clock())/CLOCKS_PER_SEC;
+  return (double)time(NULL);
 }
-

@@ -54,8 +54,8 @@ int main(int argc, char **argv)
 	setaa_to_na();
 	mat.set_to_na(); //mat.set_gap(-6,-1);
 
-	float begin_time = current_time();
-	float end_time;
+	double begin_time = current_time();
+	double end_time;
 
 	// ***********************************    parse command line and open file
 	if (argc < 5) print_usage_est(argv[0]);
@@ -79,7 +79,7 @@ int main(int argc, char **argv)
         else                   {seq_db.Read( db_in.c_str(),                   options );} 
 
 	cout << "total seq: " << seq_db.sequences.size() << endl;
-	seq_db.SortDivide( options );
+	seq_db.SortDivide( options );	
 	seq_db.DoClustering( options );
 
 	printf( "writing new database\n" );

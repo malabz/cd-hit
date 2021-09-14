@@ -43,7 +43,7 @@
 #include<vector>
 #include<map>
 
-#define CDHIT_VERSION  "4.8.1"
+#define CDHIT_VERSION  "5.0"
 
 #ifndef MAX_SEQ
 #define MAX_SEQ 655360
@@ -375,6 +375,8 @@ struct Sequence
 {
 	// real sequence, if it is not stored swap file:
 	char *data;
+	// not changed
+	char *data2;
 	// length of the sequence:
 	int   size;
 	int   bufsize;
@@ -635,7 +637,7 @@ void update_aax_cutoff(double &aa1_cutoff, double &aa2_cutoff, double &aan_cutof
 
 int calc_ann_list(int len, char *seqi, int NAA, int& aan_no, Vector<int> & aan_list, Vector<INTs> & aan_list_no, bool est=false);
 
-float current_time();
+double current_time();
 
 //some functions from very old cd-hit
 int quick_sort_idx(int *a, int *idx, int lo0, int hi0 );

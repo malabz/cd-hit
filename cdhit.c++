@@ -33,8 +33,8 @@ int main(int argc, char *argv[])
 	string db_in;
 	string db_out;
 
-	float begin_time = current_time();
-	float end_time;
+	double begin_time = current_time();
+	double end_time;
 
 	// ***********************************    parse command line and open file
 	if (argc < 5) print_usage(argv[0]);

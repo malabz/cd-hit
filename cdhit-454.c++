@@ -73,8 +73,8 @@ int main(int argc, char *argv[])
 	mat.set_gap(-3,-1); //instead of -6 -1 to maintain maxium length of alignment
 	mat.set_matrix(myBLOSUM62_na2);
 
-	float begin_time = current_time();
-	float end_time;
+	double begin_time = current_time();
+	double end_time;
 
 	// ***********************************    parse command line and open file
 	if (argc < 5) print_usage_454(argv[0]);
