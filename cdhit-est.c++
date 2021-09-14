@@ -81,11 +81,11 @@ int main(int argc, char **argv)
 	cout << "total seq: " << seq_db.sequences.size() << endl;
 	seq_db.SortDivide( options );	
 	seq_db.DoClustering( options );
-
+#if 0
 	printf( "writing new database\n" );
         if ( options.PE_mode ) { seq_db.WriteClusters( db_in.c_str(), db_in_pe.c_str(), db_out.c_str(), db_out_pe.c_str(), options ); }
         else                   { seq_db.WriteClusters( db_in.c_str(),                   db_out.c_str(),                    options ); }
-
+#endif
 	// write a backup clstr file in case next step crashes
 	seq_db.WriteExtra1D( options );
 	cout << "program completed !" << endl << endl;

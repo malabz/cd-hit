@@ -55,10 +55,10 @@ int main(int argc, char *argv[])
 	seq_db.SortDivide( options );
 
 	seq_db.DoClustering( options );
-
+#if 0 // NOT USED
 	printf( "writing new database\n" );
 	seq_db.WriteClusters( db_in.c_str(), db_out.c_str(), options );
-
+#endif
 	// write a backup clstr file in case next step crashes
 	seq_db.WriteExtra1D( options );
 	cout << "program completed !" << endl << endl;

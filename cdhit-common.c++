@@ -50,11 +50,11 @@
 const char aa[] = {"ARNDCQEGHILKMFPSTWYVBZX"};
 //{0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,2,6,20};
 int aa2idx[] = {0, 2, 4, 3, 6, 13,7, 8, 9,20,11,10,12, 2,20,14,
-                5, 1,15,16,20,19,17,20,18, 6};
-    // idx for  A  B  C  D  E  F  G  H  I  J  K  L  M  N  O  P
-    //          Q  R  S  T  U  V  W  X  Y  Z
-    // so  aa2idx[ X - 'A'] => idx_of_X, eg aa2idx['A' - 'A'] => 0,
-    // and aa2idx['M'-'A'] => 12
+				5, 1,15,16,20,19,17,20,18, 6};
+	// idx for  A  B  C  D  E  F  G  H  I  J  K  L  M  N  O  P
+	//          Q  R  S  T  U  V  W  X  Y  Z
+	// so  aa2idx[ X - 'A'] => idx_of_X, eg aa2idx['A' - 'A'] => 0,
+	// and aa2idx['M'-'A'] => 12
 
 int BLOSUM62[] = {
   4,                                                                  // A
@@ -85,11 +85,11 @@ int BLOSUM62[] = {
 };
 
 int na2idx[] = {0, 4, 1, 4, 4, 4, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4,
-                4, 4, 4, 3, 3, 4, 4, 4, 4, 4};
-    // idx for  A  B  C  D  E  F  G  H  I  J  K  L  M  N  O  P
-    //          Q  R  S  T  U  V  W  X  Y  Z
-    // so aa2idx[ X - 'A'] => idx_of_X, eg aa2idx['A' - 'A'] => 0,
-    // and aa2idx['M'-'A'] => 4
+				4, 4, 4, 3, 3, 4, 4, 4, 4, 4};
+	// idx for  A  B  C  D  E  F  G  H  I  J  K  L  M  N  O  P
+	//          Q  R  S  T  U  V  W  X  Y  Z
+	// so aa2idx[ X - 'A'] => idx_of_X, eg aa2idx['A' - 'A'] => 0,
+	// and aa2idx['M'-'A'] => 4
 int BLOSUM62_na[] = {
   2,                  // A
  -2, 2,               // C
@@ -287,7 +287,7 @@ bool Options::SetOption2D( const char *flag, const char *value )
 {
 	if( SetOptionCommon( flag, value ) ) return true;
 	if (strcmp(flag, "-i2" ) == 0) input2 = value;
-        else if (strcmp(flag, "-j2" ) == 0) input2_pe = value;
+		else if (strcmp(flag, "-j2" ) == 0) input2_pe = value;
 	else if (strcmp(flag, "-s2") == 0) diff_cutoff2 = atof(value);
 	else if (strcmp(flag, "-S2") == 0) diff_cutoff_aa2 = atoi(value);
 	else return false;
@@ -359,13 +359,13 @@ void Options::Validate()
 		if ((cluster_thd > 1.0) || (cluster_thd < 0.4)) bomb_error("invalid clstr");
 	}
 
-        if (input.size()  == 0) bomb_error("no input file");
-        if (output.size() == 0) bomb_error("no output file");
-        if (PE_mode) {
-          if (input_pe.size()  == 0) bomb_error("no input file for R2 sequences in PE mode");
-          if (output_pe.size() == 0) bomb_error("no output file for R2 sequences in PE mode");
-        }
-        if (isEST && (align_pos==1)) option_r = 0; 
+		if (input.size()  == 0) bomb_error("no input file");
+		if (output.size() == 0) bomb_error("no output file");
+		if (PE_mode) {
+		  if (input_pe.size()  == 0) bomb_error("no input file for R2 sequences in PE mode");
+		  if (output_pe.size() == 0) bomb_error("no output file for R2 sequences in PE mode");
+		}
+		if (isEST && (align_pos==1)) option_r = 0; 
 
 	if (band_width < 1 ) bomb_error("invalid band width");
 	if (NAA < 2 || NAA > NAA_top_limit) bomb_error("invalid word length");
@@ -376,9 +376,9 @@ void Options::Validate()
 	if( has2D ){
 		if ((diff_cutoff2<0) || (diff_cutoff2>1)) bomb_error("invalid value for -s2");
 		if (diff_cutoff_aa2<0) bomb_error("invalid value for -S2");
-          if (PE_mode) {
-            if (input2_pe.size()  == 0) bomb_error("no input file for R2 sequences for 2nd db in PE mode");
-          }
+		  if (PE_mode) {
+			if (input2_pe.size()  == 0) bomb_error("no input file for R2 sequences for 2nd db in PE mode");
+		  }
 	}
 	if (global_identity == 0) print = 1;
 	if (short_coverage < long_coverage) short_coverage = long_coverage;
@@ -492,9 +492,9 @@ void strrev(char *p)
   char *q = p;
   while(q && *q) ++q;
   for(--q; p < q; ++p, --q)
-    *p = *p ^ *q,
-    *q = *p ^ *q,
-    *p = *p ^ *q;
+	*p = *p ^ *q,
+	*q = *p ^ *q,
+	*p = *p ^ *q;
 }
 
 ////For smiple len1 <= len2, len2 is for existing representative
@@ -611,7 +611,7 @@ int diag_test_aapn(int NAA1, char iseq2[], int len1, int len2, WorkingBuffer & b
  
 
 int diag_test_aapn_est(int NAA1, char iseq2[], int len1, int len2, WorkingBuffer & buffer, 
-        int &best_sum, int band_width, int &band_left, int &band_center, int &band_right, int required_aa1)
+		int &best_sum, int band_width, int &band_left, int &band_center, int &band_right, int required_aa1)
 {
 	int i, i1, j, k;
 	int *pp, *pp2;
@@ -751,37 +751,37 @@ int diag_test_aapn_est(int NAA1, char iseq2[], int len1, int len2, WorkingBuffer
 /*
 local alignment of two sequence within a diag band
 for band 0 means direction (0,0) -> (1,1)
-         1 means direction (0,1) -> (1,2)
-        -1 means direction (1,0) -> (2,1)
+		 1 means direction (0,1) -> (1,2)
+		-1 means direction (1,0) -> (2,1)
 added on 2006 11 13
 band 0                      XXXXXXXXXXXXXXXXXX               seq2, rep seq
-                            XXXXXXXXXXXXXXX                  seq1
+							XXXXXXXXXXXXXXX                  seq1
 band 1                      XXXXXXXXXXXXXXXXXX               seq2, rep seq
-                             XXXXXXXXXXXXXXX                 seq1
+							 XXXXXXXXXXXXXXX                 seq1
 extreme right (+)           XXXXXXXXXXXXXXXXXX               seq2, rep seq
-    band = len2-1                            XXXXXXXXXXXXXXX seq1
+	band = len2-1                            XXXXXXXXXXXXXXX seq1
 band-1                      XXXXXXXXXXXXXXXXXX               seq2, rep seq
-                           XXXXXXXXXXXXXXX                   seq1
+						   XXXXXXXXXXXXXXX                   seq1
 extreme left (-)            XXXXXXXXXXXXXXXXXX               seq2, rep seq
-              XXXXXXXXXXXXXXX   band = -(len1-1)             seq1
+			  XXXXXXXXXXXXXXX   band = -(len1-1)             seq1
 iseq len are integer sequence and its length,
 mat is matrix, return ALN_PAIR class
 
-       band:  -101   seq2 len2 = 17
-                \\\1234567890123456
-              0  \xxxxxxxxxxxxxxxxx
-              1   xxxxxxxxxxxxxxxxx\ most right band = len2-1
-              2   xxxxxxxxxxxxxxxxx
-    seq1      3   xxxxxxxxxxxxxxxxx
-    len1 = 11 4   xxxxxxxxxxxxxxxxx
-              5   xxxxxxxxxxxxxxxxx
-              6   xxxxxxxxxxxxxxxxx
-              7   xxxxxxxxxxxxxxxxx
-              8   xxxxxxxxxxxxxxxxx
-              9   xxxxxxxxxxxxxxxxx
-              0   xxxxxxxxxxxxxxxxx
-                  \
-                   most left band = -(len1-1)
+	   band:  -101   seq2 len2 = 17
+				\\\1234567890123456
+			  0  \xxxxxxxxxxxxxxxxx
+			  1   xxxxxxxxxxxxxxxxx\ most right band = len2-1
+			  2   xxxxxxxxxxxxxxxxx
+	seq1      3   xxxxxxxxxxxxxxxxx
+	len1 = 11 4   xxxxxxxxxxxxxxxxx
+			  5   xxxxxxxxxxxxxxxxx
+			  6   xxxxxxxxxxxxxxxxx
+			  7   xxxxxxxxxxxxxxxxx
+			  8   xxxxxxxxxxxxxxxxx
+			  9   xxxxxxxxxxxxxxxxx
+			  0   xxxxxxxxxxxxxxxxx
+				  \
+				   most left band = -(len1-1)
 
 */
 
@@ -803,7 +803,7 @@ int local_band_align( char iseq1[], char iseq2[], int len1, int len2, ScoreMatri
 	int band_width = band_right - band_left + 1;
 	int band_width1 = band_width + 1;
 
-    // score_mat, back_mat [i][j]: i index of seqi (0 to len(seqi)-1), j index of band (0 to band_width-1)
+	// score_mat, back_mat [i][j]: i index of seqi (0 to len(seqi)-1), j index of band (0 to band_width-1)
 	MatrixInt64 & score_mat = buffer.score_mat;
 	MatrixInt   & back_mat = buffer.back_mat;
 
@@ -824,24 +824,24 @@ int local_band_align( char iseq1[], char iseq2[], int len1, int len2, ScoreMatri
 
 	best_score = 0;
 	/* seq1 is query, seq2 is rep
-                  seq2    len2 = 17       seq2    len2 = 17    seq2    len2 = 17
-                  01234567890123456       01234567890123456    01234567890123456
-       0          xxxxxxxxxxxxxxxxx \\\\\\XXXxxxxxxxxxxxxxx    xXXXXXXXxxxxxxxxx
-       1     \\\\\Xxxxxxxxxxxxxxxxx  \\\\\Xxx\xxxxxxxxxxxxx    xx\xxxxx\xxxxxxxx
-       2      \\\\X\xxxxxxxxxxxxxxx   \\\\Xxxx\xxxxxxxxxxxx    xxx\xxxxx\xxxxxxx
+				  seq2    len2 = 17       seq2    len2 = 17    seq2    len2 = 17
+				  01234567890123456       01234567890123456    01234567890123456
+	   0          xxxxxxxxxxxxxxxxx \\\\\\XXXxxxxxxxxxxxxxx    xXXXXXXXxxxxxxxxx
+	   1     \\\\\Xxxxxxxxxxxxxxxxx  \\\\\Xxx\xxxxxxxxxxxxx    xx\xxxxx\xxxxxxxx
+	   2      \\\\X\xxxxxxxxxxxxxxx   \\\\Xxxx\xxxxxxxxxxxx    xxx\xxxxx\xxxxxxx
   seq1 3       \\\Xx\xxxxxxxxxxxxxx    \\\Xxxxx\xxxxxxxxxxx    xxxx\xxxxx\xxxxxx
   len1 4        \\Xxx\xxxxxxxxxxxxx     \\Xxxxxx\xxxxxxxxxx    xxxxx\xxxxx\xxxxx
   = 11 5         \Xxxx\xxxxxxxxxxxx      \Xxxxxxx\xxxxxxxxx    xxxxxx\xxxxx\xxxx
-       6          Xxxxx\xxxxxxxxxxx       Xxxxxxxx\xxxxxxxx    xxxxxxx\xxxxx\xxx
-       7          x\xxxx\xxxxxxxxxx       x\xxxxxxx\xxxxxxx    xxxxxxxx\xxxxx\xx
-       8          xx\xxxx\xxxxxxxxx       xx\xxxxxxx\xxxxxx    xxxxxxxxx\xxxxx\x
-       9          xxx\xxxx\xxxxxxxx       xxx\xxxxxxx\xxxxx    xxxxxxxxxx\xxxxx\
-       0          xxxx\xxxx\xxxxxxx       xxxx\xxxxxxx\xxxx    xxxxxxxxxxx\xxxxx
-                  band_left < 0 (-6)      band_left < 0 (-6)   band_left >=0 (1)
-                  band_right < 0 (-1)     band_right >=0 (2)   band_right >=0(7)
-                  band_width 6            band_width 9         band_width 7
-       init score_mat, and iden_mat (place with upper 'X')
-     */
+	   6          Xxxxx\xxxxxxxxxxx       Xxxxxxxx\xxxxxxxx    xxxxxxx\xxxxx\xxx
+	   7          x\xxxx\xxxxxxxxxx       x\xxxxxxx\xxxxxxx    xxxxxxxx\xxxxx\xx
+	   8          xx\xxxx\xxxxxxxxx       xx\xxxxxxx\xxxxxx    xxxxxxxxx\xxxxx\x
+	   9          xxx\xxxx\xxxxxxxx       xxx\xxxxxxx\xxxxx    xxxxxxxxxx\xxxxx\
+	   0          xxxx\xxxx\xxxxxxx       xxxx\xxxxxxx\xxxx    xxxxxxxxxxx\xxxxx
+				  band_left < 0 (-6)      band_left < 0 (-6)   band_left >=0 (1)
+				  band_right < 0 (-1)     band_right >=0 (2)   band_right >=0(7)
+				  band_width 6            band_width 9         band_width 7
+	   init score_mat, and iden_mat (place with upper 'X')
+	 */
 
 	if (band_left < 0) {  //set score to left border of the matrix within band
 		int tband = (band_right < 0) ? band_right : 0;
@@ -850,7 +850,7 @@ int local_band_align( char iseq1[], char iseq2[], int len1, int len2, ScoreMatri
 			i = -k;
 			j1 = k-band_left;
 			// penalty for leading gap opening = penalty for gap extension
-            // each of the left side query hunging residues give ext_gap (-1)
+			// each of the left side query hunging residues give ext_gap (-1)
 			score_mat[i][j1] =  mat.ext_gap * i;
 			back_mat[i][j1] = DP_BACK_TOP;
 		}
@@ -1336,7 +1336,7 @@ int WordTable::AddWordCounts(int aan_no, Vector<int> & word_encodes, Vector<INTs
 }
 
 int WordTable::AddWordCountsFrag( int aan_no, Vector<int> & word_encodes,
-    Vector<INTs> & word_encodes_no, int frag, int frag_size )
+	Vector<INTs> & word_encodes_no, int frag, int frag_size )
 {
 	int i, j, k, i1, k1, fra;
 
@@ -1428,7 +1428,7 @@ void PartialQuickSort( IndexCount *data, int first, int last, int partial )
 	if( upper+1 < last ) PartialQuickSort( data, upper+1, last, partial );
 }
 int WordTable::CountWords(int aan_no, Vector<int> & word_encodes, Vector<INTs> & word_encodes_no,
-    NVector<IndexCount> &lookCounts, NVector<uint32_t> & indexMapping, 
+	NVector<IndexCount> &lookCounts, NVector<uint32_t> & indexMapping, 
 	bool est, int min)
 {
 	int S = frag_count ? frag_count : sequences.size();
@@ -1489,7 +1489,7 @@ Sequence::Sequence( const Sequence & other )
 	distance = 2.0;
 	if( other.data ){
 		size = bufsize = other.size;
-                size_R2 = 0;
+				size_R2 = 0;
 		data = new char[size+1];
 		//printf( "data: %p  %p\n", data, other.data );
 		data[size] = 0;
@@ -1513,7 +1513,7 @@ Sequence::Sequence( const Sequence & other )
 Sequence::Sequence( const Sequence & other, const Sequence & other2, int mode )
 {
 	int i;
-        if (mode != 1) bomb_error("unknown mode");
+		if (mode != 1) bomb_error("unknown mode");
 
 	//printf( "new: %p  %p\n", this, & other );
 	memcpy( this, & other, sizeof( Sequence ) );
@@ -1521,24 +1521,24 @@ Sequence::Sequence( const Sequence & other, const Sequence & other2, int mode )
 
 	if( other.data && other2.data ){
 		size = bufsize = (other.size + other2.size);
-                size_R2 = other2.size;
+				size_R2 = other2.size;
 		data = new char[size+1];
 		//printf( "data: %p  %p\n", data, other.data );
 		data[size] = 0;     
-        data[size_R2] = 0;  
-        memcpy( data, other2.data, size_R2); // copy R2 first
-        strrev( data );                      // reverse R2 on data
+		data[size_R2] = 0;  
+		memcpy( data, other2.data, size_R2); // copy R2 first
+		strrev( data );                      // reverse R2 on data
 		memcpy( data+size_R2, other.data, size-size_R2 ); // copy R1 to end of R2
 		data2 = new char[size + 1];
 		data2[size] = 0;
 		memcpy(data2, data, size);
 		//for (i=0; i<size; i++) data[i] = other.data[i];
 		des_begin2 = other2.des_begin;
-        tot_length2 = other2.tot_length;
+		tot_length2 = other2.tot_length;
 	}
-        else if ( other.data || other2.data ) {
-                bomb_error("Not both PE sequences have data");
-        }
+		else if ( other.data || other2.data ) {
+				bomb_error("Not both PE sequences have data");
+		}
 
 	if( other.identifier ){ // only use R1
 		int len = strlen( other.identifier );
@@ -1612,9 +1612,9 @@ void Sequence::Reserve( int n )
 	if( size ) data[size] = 0;
 }
 void Sequence::trim(int trim_len) {
-    if (trim_len >= size) return;
-    size = trim_len;
-    if (size) data[size]=0;
+	if (trim_len >= size) return;
+	size = trim_len;
+	if (size) data[size]=0;
 }
 void Sequence::ConvertBases()
 {
@@ -1700,87 +1700,88 @@ void Sequence::PrintInfo( int id, FILE *fout, const Options & options, char *buf
 void SequenceDB::Readgz( const char *file, const Options & options )
 {
 #ifdef WITH_ZLIB
-    Sequence one;
-    Sequence des;
-    gzFile fin = gzopen(file, "r");
-    char *buffer = NULL;
-    char *res = NULL;
-    int option_l = options.min_length;
-    if( fin == NULL ) bomb_error( "Failed to open the database file" );
-    Clear();
-    buffer = new char[ MAX_LINE_SIZE+1 ];
+	Sequence one;
+	Sequence des;
+	gzFile fin = gzopen(file, "r");
+	char *buffer = NULL;
+	char *res = NULL;
+	int option_l = options.min_length;
+	if( fin == NULL ) bomb_error( "Failed to open the database file" );
+	Clear();
+	buffer = new char[ MAX_LINE_SIZE+1 ];
 
-    while (not gzeof( fin ) || one.size) { /* do not break when the last sequence is not handled */
-        buffer[0] = '>';
-        if ( (res=gzgets(fin, buffer, MAX_LINE_SIZE)) == NULL && one.size == 0) break;
-        if( buffer[0] == '+' ){
-            int len = strlen( buffer );
-            int len2 = len;
-            while( len2 && buffer[len2-1] != '\n' ){
-                if ( (res=gzgets(fin, buffer, MAX_LINE_SIZE)) == NULL ) break;
-                len2 = strlen( buffer );
-                len += len2;
-            }
-            one.tot_length += len;
+	while (not gzeof( fin ) || one.size) { /* do not break when the last sequence is not handled */
+		buffer[0] = '>';
+		if ( (res=gzgets(fin, buffer, MAX_LINE_SIZE)) == NULL && one.size == 0) break;
+		if( buffer[0] == '+' ){
+			int len = strlen( buffer );
+			int len2 = len;
+			while( len2 && buffer[len2-1] != '\n' ){
+				if ( (res=gzgets(fin, buffer, MAX_LINE_SIZE)) == NULL ) break;
+				len2 = strlen( buffer );
+				len += len2;
+			}
+			one.tot_length += len;
 
-            // read next line quality score
-            if ( (res=gzgets(fin, buffer, MAX_LINE_SIZE)) == NULL ) bomb_error("can not read quality score after");
-            len = strlen( buffer );
-            len2 = len;
-            while( len2 && buffer[len2-1] != '\n' ){
-                if ( (res=gzgets(fin, buffer, MAX_LINE_SIZE)) == NULL ) break;
-                len2 = strlen( buffer );
-                len += len2;
-            }
-            one.tot_length += len;
-        }else if (buffer[0] == '>' || buffer[0] == '@' || (res==NULL && one.size)) {
-            if ( one.size ) { // write previous record
-                if( one.identifier == NULL || one.Format() ){
-                    printf( "Warning: from file \"%s\",\n", file );
-                    printf( "Discarding invalid sequence or sequence without identifier and description!\n\n" );
-                    if( one.identifier ) printf( "%s\n", one.identifier );
-                    printf( "%s\n", one.data );
-                    one.size = 0;
-                }
-                one.index = sequences.size();
-                if( one.size > option_l ) {
-                    if (options.trim_len    > 0) one.trim(options.trim_len);
-                    sequences.Append( new Sequence( one ) ); 
-                }
-            }
-            one.size = 0;
-            one.tot_length = 0;
+			// read next line quality score
+			if ( (res=gzgets(fin, buffer, MAX_LINE_SIZE)) == NULL ) bomb_error("can not read quality score after");
+			len = strlen( buffer );
+			len2 = len;
+			while( len2 && buffer[len2-1] != '\n' ){
+				if ( (res=gzgets(fin, buffer, MAX_LINE_SIZE)) == NULL ) break;
+				len2 = strlen( buffer );
+				len += len2;
+			}
+			one.tot_length += len;
+		}else if (buffer[0] == '>' || buffer[0] == '@' || (res==NULL && one.size)) {
+			if ( one.size ) { // write previous record
+				if( one.identifier == NULL || one.Format() ){
+					printf( "Warning: from file \"%s\",\n", file );
+					printf( "Discarding invalid sequence or sequence without identifier and description!\n\n" );
+					if( one.identifier ) printf( "%s\n", one.identifier );
+					printf( "%s\n", one.data );
+					one.size = 0;
+				}
+				one.index = sequences.size();
+				if( one.size > option_l ) {
+					if (options.trim_len    > 0) one.trim(options.trim_len);
+					sequences.Append( new Sequence( one ) ); 
+				}
+			}
+			one.size = 0;
+			one.tot_length = 0;
 
-            int len = strlen( buffer );
-            int len2 = len;
-            des.size = 0;
-            des += buffer;
-            while( len2 && buffer[len2-1] != '\n' ){
-                if ( (res=gzgets(fin, buffer, MAX_LINE_SIZE)) == NULL ) break;
-                des += buffer;
-                len2 = strlen( buffer );
-                len += len2;
-            }
-            size_t offset = gztell( fin );
-            one.des_begin = offset - len;
-            one.tot_length += len;              // count first line
+			int len = strlen( buffer );
+			int len2 = len;
+			des.size = 0;
+			des += buffer;
+			while( len2 && buffer[len2-1] != '\n' ){
+				if ( (res=gzgets(fin, buffer, MAX_LINE_SIZE)) == NULL ) break;
+				des += buffer;
+				len2 = strlen( buffer );
+				len += len2;
+			}
+			size_t offset = gztell( fin );
+			one.des_begin = offset - len;
+			one.tot_length += len;              // count first line
 
-            int i = 0;
-            if( des.data[i] == '>' || des.data[i] == '@' || des.data[i] == '+' ) i += 1;
-            if( des.data[i] == ' ' or des.data[i] == '\t' ) i += 1;
-            if( options.des_len and options.des_len < des.size ) des.size = options.des_len;
-            while( i < des.size and ! isspace( des.data[i] ) ) i += 1;
-            des.data[i] = 0;
-            one.identifier = des.data;
-        } else {
-            one.tot_length += strlen(buffer);  one += buffer;
-        }
-    }
-    one.identifier = NULL;
-    delete[] buffer;
-    gzclose( fin );
+			int i = 0;
+			if( des.data[i] == '>' || des.data[i] == '@' || des.data[i] == '+' ) i += 1;
+			if( des.data[i] == ' ' or des.data[i] == '\t' ) i += 1;
+			if( options.des_len and options.des_len < des.size ) des.size = options.des_len;
+			while( i < des.size ) i += 1;
+			if(des.data[i - 1] == '\n') -- i;
+			des.data[i] = 0;
+			one.identifier = des.data;
+		} else {
+			one.tot_length += strlen(buffer);  one += buffer;
+		}
+	}
+	one.identifier = NULL;
+	delete[] buffer;
+	gzclose( fin );
 #else
-    bomb_error("this program was not compiled with zlib");
+	bomb_error("this program was not compiled with zlib");
 #endif
 }
 
@@ -1793,98 +1794,99 @@ void SequenceDB::Readgz( const char *file, const Options & options )
 //       tot_length is the total bytes of sequence record 
 void SequenceDB::Read( const char *file, const Options & options )
 {
-    int f_len = strlen(file);
-    if (strcmp(file + f_len - 3, ".gz") == 0 ) {
-        Readgz(file, options);
-        return;
-    }
+	int f_len = strlen(file);
+	if (strcmp(file + f_len - 3, ".gz") == 0 ) {
+		Readgz(file, options);
+		return;
+	}
 
-    Sequence one;
-    Sequence des;
-    FILE *fin = fopen( file, "rb" );
-    char *buffer = NULL;
-    char *res = NULL;
-    int option_l = options.min_length;
-    if( fin == NULL ) bomb_error( "Failed to open the database file" );
-    Clear();
-    buffer = new char[ MAX_LINE_SIZE+1 ];
+	Sequence one;
+	Sequence des;
+	FILE *fin = fopen( file, "rb" );
+	char *buffer = NULL;
+	char *res = NULL;
+	int option_l = options.min_length;
+	if( fin == NULL ) bomb_error( "Failed to open the database file" );
+	Clear();
+	buffer = new char[ MAX_LINE_SIZE+1 ];
 
-    while (not feof( fin ) || one.size) { /* do not break when the last sequence is not handled */
-        buffer[0] = '>';
-        if ( (res=fgets( buffer, MAX_LINE_SIZE, fin )) == NULL && one.size == 0) break;
-        if( buffer[0] == '+' ){
-            int len = strlen( buffer );
-            int len2 = len;
-            while( len2 && buffer[len2-1] != '\n' ){
-                if ( (res=fgets( buffer, MAX_LINE_SIZE, fin )) == NULL ) break;
-                len2 = strlen( buffer );
-                len += len2;
-            }
-            one.tot_length += len;
+	while (not feof( fin ) || one.size) { /* do not break when the last sequence is not handled */
+		buffer[0] = '>';
+		if ( (res=fgets( buffer, MAX_LINE_SIZE, fin )) == NULL && one.size == 0) break;
+		if( buffer[0] == '+' ){
+			int len = strlen( buffer );
+			int len2 = len;
+			while( len2 && buffer[len2-1] != '\n' ){
+				if ( (res=fgets( buffer, MAX_LINE_SIZE, fin )) == NULL ) break;
+				len2 = strlen( buffer );
+				len += len2;
+			}
+			one.tot_length += len;
 
-            // read next line quality score
-            if ( (res=fgets( buffer, MAX_LINE_SIZE, fin )) == NULL ) bomb_error("can not read quality score after");
-            len = strlen( buffer );
-            len2 = len;
-            while( len2 && buffer[len2-1] != '\n' ){
-                if ( (res=fgets( buffer, MAX_LINE_SIZE, fin )) == NULL ) break;
-                len2 = strlen( buffer );
-                len += len2;
-            }
-            one.tot_length += len;
-        }else if (buffer[0] == '>' || buffer[0] == '@' || (res==NULL && one.size)) {
-            if ( one.size ) { // write previous record
-                if( one.identifier == NULL || one.Format() ){
-                    printf( "Warning: from file \"%s\",\n", file );
-                    printf( "Discarding invalid sequence or sequence without identifier and description!\n\n" );
-                    if( one.identifier ) printf( "%s\n", one.identifier );
-                    printf( "%s\n", one.data );
-                    one.size = 0;
-                }
-                one.index = sequences.size();
-                if( one.size > option_l ) {
-                    if (options.trim_len    > 0) one.trim(options.trim_len);
-                    sequences.Append( new Sequence( one ) ); 
-                }
-            }
-            one.size = 0;
-            one.tot_length = 0;
+			// read next line quality score
+			if ( (res=fgets( buffer, MAX_LINE_SIZE, fin )) == NULL ) bomb_error("can not read quality score after");
+			len = strlen( buffer );
+			len2 = len;
+			while( len2 && buffer[len2-1] != '\n' ){
+				if ( (res=fgets( buffer, MAX_LINE_SIZE, fin )) == NULL ) break;
+				len2 = strlen( buffer );
+				len += len2;
+			}
+			one.tot_length += len;
+		}else if (buffer[0] == '>' || buffer[0] == '@' || (res==NULL && one.size)) {
+			if ( one.size ) { // write previous record
+				if( one.identifier == NULL || one.Format() ){
+					printf( "Warning: from file \"%s\",\n", file );
+					printf( "Discarding invalid sequence or sequence without identifier and description!\n\n" );
+					if( one.identifier ) printf( "%s\n", one.identifier );
+					printf( "%s\n", one.data );
+					one.size = 0;
+				}
+				one.index = sequences.size();
+				if( one.size > option_l ) {
+					if (options.trim_len    > 0) one.trim(options.trim_len);
+					sequences.Append( new Sequence( one ) ); 
+				}
+			}
+			one.size = 0;
+			one.tot_length = 0;
 
-            int len = strlen( buffer );
-            int len2 = len;
-            des.size = 0;
-            des += buffer;
-            while( len2 && buffer[len2-1] != '\n' ){
-                if ( (res=fgets( buffer, MAX_LINE_SIZE, fin )) == NULL ) break;
-                des += buffer;
-                len2 = strlen( buffer );
-                len += len2;
-            }
-            size_t offset = ftell( fin );
-            one.des_begin = offset - len;
-            one.tot_length += len;              // count first line
+			int len = strlen( buffer );
+			int len2 = len;
+			des.size = 0;
+			des += buffer;
+			while( len2 && buffer[len2-1] != '\n' ){
+				if ( (res=fgets( buffer, MAX_LINE_SIZE, fin )) == NULL ) break;
+				des += buffer;
+				len2 = strlen( buffer );
+				len += len2;
+			}
+			size_t offset = ftell( fin );
+			one.des_begin = offset - len;
+			one.tot_length += len;              // count first line
 
-            int i = 0;
-            if( des.data[i] == '>' || des.data[i] == '@' || des.data[i] == '+' ) i += 1;
-            if( des.data[i] == ' ' or des.data[i] == '\t' ) i += 1;
-            if( options.des_len and options.des_len < des.size ) des.size = options.des_len;
-            while( i < des.size and ! isspace( des.data[i] ) ) i += 1;
-            des.data[i] = 0;
-            one.identifier = des.data;
-        } else {
-            one.tot_length += strlen(buffer);  one += buffer;
-        }
-    }
+			int i = 0;
+			if( des.data[i] == '>' || des.data[i] == '@' || des.data[i] == '+' ) i += 1;
+			if( des.data[i] == ' ' or des.data[i] == '\t' ) i += 1;
+			if( options.des_len and options.des_len < des.size ) des.size = options.des_len;
+			while( i < des.size ) i += 1;
+			if(des.data[i - 1] == '\n') -- i;
+			des.data[i] = 0;
+			one.identifier = des.data;
+		} else {
+			one.tot_length += strlen(buffer);  one += buffer;
+		}
+	}
 #if 0
-    int i, n = 0;
-    for(i=0; i<sequences.size(); i++) n += sequences[i].bufsize + 4;
-    cout<<n<<"\t"<<sequences.capacity() * sizeof(Sequence)<<endl;
-    int i;
-    scanf( "%i", & i );
+	int i, n = 0;
+	for(i=0; i<sequences.size(); i++) n += sequences[i].bufsize + 4;
+	cout<<n<<"\t"<<sequences.capacity() * sizeof(Sequence)<<endl;
+	int i;
+	scanf( "%i", & i );
 #endif
-    one.identifier = NULL;
-    delete[] buffer;
-    fclose( fin );
+	one.identifier = NULL;
+	delete[] buffer;
+	fclose( fin );
 }
 
 
@@ -1893,151 +1895,152 @@ void SequenceDB::Read( const char *file, const Options & options )
 void SequenceDB::Readgz( const char *file, const char *file2, const Options & options )
 {
 #ifdef WITH_ZLIB
-    Sequence one, two;
-    Sequence des;
-    gzFile fin = gzopen(file, "r");
-    gzFile fin2= gzopen(file2,"r");
-    char *buffer = NULL;
-    char *buffer2= NULL;
-    char *res = NULL;
-    char *res2= NULL;
-    int option_l = options.min_length;
-    if( fin == NULL ) bomb_error( "Failed to open the database file" );
-    if( fin2== NULL ) bomb_error( "Failed to open the database file" );
-    Clear();
-    buffer = new char[ MAX_LINE_SIZE+1 ];
-    buffer2= new char[ MAX_LINE_SIZE+1 ];
+	Sequence one, two;
+	Sequence des;
+	gzFile fin = gzopen(file, "r");
+	gzFile fin2= gzopen(file2,"r");
+	char *buffer = NULL;
+	char *buffer2= NULL;
+	char *res = NULL;
+	char *res2= NULL;
+	int option_l = options.min_length;
+	if( fin == NULL ) bomb_error( "Failed to open the database file" );
+	if( fin2== NULL ) bomb_error( "Failed to open the database file" );
+	Clear();
+	buffer = new char[ MAX_LINE_SIZE+1 ];
+	buffer2= new char[ MAX_LINE_SIZE+1 ];
 
-    while (((not gzeof( fin )) && (not gzeof( fin2)) ) || (one.size && two.size)) { /* do not break when the last sequence is not handled */
-        buffer[0] = '>'; res =gzgets(fin,  buffer,  MAX_LINE_SIZE);
-        buffer2[0]= '>'; res2=gzgets(fin2, buffer2, MAX_LINE_SIZE);
+	while (((not gzeof( fin )) && (not gzeof( fin2)) ) || (one.size && two.size)) { /* do not break when the last sequence is not handled */
+		buffer[0] = '>'; res =gzgets(fin,  buffer,  MAX_LINE_SIZE);
+		buffer2[0]= '>'; res2=gzgets(fin2, buffer2, MAX_LINE_SIZE);
 
-        if ( (res      == NULL) && (res2     != NULL)) bomb_error( "Paired input files have different number sequences" );
-        if ( (res      != NULL) && (res2     == NULL)) bomb_error( "Paired input files have different number sequences" );
-        if ( (one.size == 0   ) && (two.size >     0)) bomb_error( "Paired input files have different number sequences" );
-        if ( (one.size >  0   ) && (two.size ==    0)) bomb_error( "Paired input files have different number sequences" );
-        if ( (res      == NULL) && (one.size ==    0)) break;
+		if ( (res      == NULL) && (res2     != NULL)) bomb_error( "Paired input files have different number sequences" );
+		if ( (res      != NULL) && (res2     == NULL)) bomb_error( "Paired input files have different number sequences" );
+		if ( (one.size == 0   ) && (two.size >     0)) bomb_error( "Paired input files have different number sequences" );
+		if ( (one.size >  0   ) && (two.size ==    0)) bomb_error( "Paired input files have different number sequences" );
+		if ( (res      == NULL) && (one.size ==    0)) break;
 
-        if( buffer[0] == '+' ){ // fastq 3rd line
-            // file 1
-            int len = strlen( buffer ); 
-            int len2 = len;
-            while( len2 && buffer[len2-1] != '\n' ){ // read until the end of the line
-                if ( (res=gzgets(fin, buffer, MAX_LINE_SIZE)) == NULL ) break;
-                len2 = strlen( buffer );
-                len += len2;
-            }
-            one.tot_length += len;
+		if( buffer[0] == '+' ){ // fastq 3rd line
+			// file 1
+			int len = strlen( buffer ); 
+			int len2 = len;
+			while( len2 && buffer[len2-1] != '\n' ){ // read until the end of the line
+				if ( (res=gzgets(fin, buffer, MAX_LINE_SIZE)) == NULL ) break;
+				len2 = strlen( buffer );
+				len += len2;
+			}
+			one.tot_length += len;
 
-            // read next line quality score
-            if ( (res=gzgets(fin, buffer, MAX_LINE_SIZE)) == NULL ) bomb_error("can not read quality score after");
-            len = strlen( buffer );
-            len2 = len;
-            while( len2 && buffer[len2-1] != '\n' ){
-                if ( (res=gzgets(fin, buffer, MAX_LINE_SIZE)) == NULL ) break;
-                len2 = strlen( buffer );
-                len += len2;
-            }
-            one.tot_length += len;
+			// read next line quality score
+			if ( (res=gzgets(fin, buffer, MAX_LINE_SIZE)) == NULL ) bomb_error("can not read quality score after");
+			len = strlen( buffer );
+			len2 = len;
+			while( len2 && buffer[len2-1] != '\n' ){
+				if ( (res=gzgets(fin, buffer, MAX_LINE_SIZE)) == NULL ) break;
+				len2 = strlen( buffer );
+				len += len2;
+			}
+			one.tot_length += len;
 
-            // file 2
-            len = strlen( buffer2 );
-            len2 = len;
-            while( len2 && buffer2[len2-1] != '\n' ){ // read until the end of the line
-                if ( (res2=gzgets(fin2, buffer2, MAX_LINE_SIZE)) == NULL ) break;
-                len2 = strlen( buffer2 );
-                len += len2;
-            }
-            two.tot_length += len;
+			// file 2
+			len = strlen( buffer2 );
+			len2 = len;
+			while( len2 && buffer2[len2-1] != '\n' ){ // read until the end of the line
+				if ( (res2=gzgets(fin2, buffer2, MAX_LINE_SIZE)) == NULL ) break;
+				len2 = strlen( buffer2 );
+				len += len2;
+			}
+			two.tot_length += len;
 
-            // read next line quality score
-            if ( (res2=gzgets(fin2, buffer2, MAX_LINE_SIZE)) == NULL ) bomb_error("can not read quality score after");
-            len = strlen( buffer2 );
-            len2 = len;
-            while( len2 && buffer2[len2-1] != '\n' ){
-                if ( (res2=gzgets(fin2, buffer2, MAX_LINE_SIZE)) == NULL ) break;
-                len2 = strlen( buffer2 );
-                len += len2;
-            }
-            two.tot_length += len;
+			// read next line quality score
+			if ( (res2=gzgets(fin2, buffer2, MAX_LINE_SIZE)) == NULL ) bomb_error("can not read quality score after");
+			len = strlen( buffer2 );
+			len2 = len;
+			while( len2 && buffer2[len2-1] != '\n' ){
+				if ( (res2=gzgets(fin2, buffer2, MAX_LINE_SIZE)) == NULL ) break;
+				len2 = strlen( buffer2 );
+				len += len2;
+			}
+			two.tot_length += len;
 
-        }else if (buffer[0] == '>' || buffer[0] == '@' || (res==NULL && one.size)) {
-            if ( one.size && two.size ) { // write previous record
-                if( one.identifier == NULL || one.Format() ){
-                    printf( "Warning: from file \"%s\",\n", file );
-                    printf( "Discarding invalid sequence or sequence without identifier and description!\n\n" );
-                    if( one.identifier ) printf( "%s\n", one.identifier );
-                    printf( "%s\n", one.data );
-                    one.size=0; two.size=0;
-                }
-                if( two.identifier == NULL || two.Format() ){
-                    printf( "Warning: from file \"%s\",\n", file2 );
-                    printf( "Discarding invalid sequence or sequence without identifier and description!\n\n" );
-                    if( two.identifier ) printf( "%s\n", two.identifier );
-                    printf( "%s\n", two.data );
-                    one.size=0; two.size = 0;
-                }
-                one.index = sequences.size();
-                if( (one.size + two.size)> option_l ) {
-                    if (options.trim_len    > 0) one.trim(options.trim_len);
-                    if (options.trim_len_R2 > 0) two.trim(options.trim_len_R2);
-                    sequences.Append( new Sequence( one, two, 1 ) ); 
-                }
-            }
-            // R1
-            one.size = 0;
-            one.tot_length = 0;
+		}else if (buffer[0] == '>' || buffer[0] == '@' || (res==NULL && one.size)) {
+			if ( one.size && two.size ) { // write previous record
+				if( one.identifier == NULL || one.Format() ){
+					printf( "Warning: from file \"%s\",\n", file );
+					printf( "Discarding invalid sequence or sequence without identifier and description!\n\n" );
+					if( one.identifier ) printf( "%s\n", one.identifier );
+					printf( "%s\n", one.data );
+					one.size=0; two.size=0;
+				}
+				if( two.identifier == NULL || two.Format() ){
+					printf( "Warning: from file \"%s\",\n", file2 );
+					printf( "Discarding invalid sequence or sequence without identifier and description!\n\n" );
+					if( two.identifier ) printf( "%s\n", two.identifier );
+					printf( "%s\n", two.data );
+					one.size=0; two.size = 0;
+				}
+				one.index = sequences.size();
+				if( (one.size + two.size)> option_l ) {
+					if (options.trim_len    > 0) one.trim(options.trim_len);
+					if (options.trim_len_R2 > 0) two.trim(options.trim_len_R2);
+					sequences.Append( new Sequence( one, two, 1 ) ); 
+				}
+			}
+			// R1
+			one.size = 0;
+			one.tot_length = 0;
 
-            int len = strlen( buffer );
-            int len2 = len;
-            des.size = 0;
-            des += buffer;
-            while( len2 && buffer[len2-1] != '\n' ){
-                if ( (res=gzgets(fin, buffer, MAX_LINE_SIZE)) == NULL ) break;
-                des += buffer;
-                len2 = strlen( buffer );
-                len += len2;
-            }
-            size_t offset = gztell( fin );    
-            one.des_begin = offset - len; // offset of ">" or "@" 
-            one.tot_length += len;              // count first line
+			int len = strlen( buffer );
+			int len2 = len;
+			des.size = 0;
+			des += buffer;
+			while( len2 && buffer[len2-1] != '\n' ){
+				if ( (res=gzgets(fin, buffer, MAX_LINE_SIZE)) == NULL ) break;
+				des += buffer;
+				len2 = strlen( buffer );
+				len += len2;
+			}
+			size_t offset = gztell( fin );    
+			one.des_begin = offset - len; // offset of ">" or "@" 
+			one.tot_length += len;              // count first line
 
-            int i = 0;
-            if( des.data[i] == '>' || des.data[i] == '@' || des.data[i] == '+' ) i += 1;
-            if( des.data[i] == ' ' or des.data[i] == '\t' ) i += 1;
-            if( options.des_len and options.des_len < des.size ) des.size = options.des_len;
-            while( i < des.size and ! isspace( des.data[i] ) ) i += 1;
-            des.data[i] = 0;                   // find first non-space letter
-            one.identifier = des.data;
+			int i = 0;
+			if( des.data[i] == '>' || des.data[i] == '@' || des.data[i] == '+' ) i += 1;
+			if( des.data[i] == ' ' or des.data[i] == '\t' ) i += 1;
+			if( options.des_len and options.des_len < des.size ) des.size = options.des_len;
+			while( i < des.size ) i += 1;
+			if(des.data[i - 1] == '\n') -- i;
+			des.data[i] = 0;                   // find first non-space letter
+			one.identifier = des.data;
 
-            // R2
-            two.size = 0;
-            two.tot_length = 0;
+			// R2
+			two.size = 0;
+			two.tot_length = 0;
 
-            len = strlen( buffer2 );
-            len2 = len;
-            while( len2 && buffer2[len2-1] != '\n' ){
-                if ( (res=gzgets(fin2, buffer2, MAX_LINE_SIZE)) == NULL ) break;
-                len2 = strlen( buffer2 );
-                len += len2;
-            }
-            offset = gztell( fin2 );
-            two.des_begin = offset - len;
-            two.tot_length += len;              // count first line
-            two.identifier = des.data;
-        } else {
-            one.tot_length += strlen(buffer);  one += buffer;
-            two.tot_length+= strlen(buffer2); two+= buffer2;
-        }
-    }
-    one.identifier = NULL;
-    two.identifier = NULL;
-    delete[] buffer;
-    gzclose( fin );
-    delete[] buffer2;
-    gzclose( fin2 );
+			len = strlen( buffer2 );
+			len2 = len;
+			while( len2 && buffer2[len2-1] != '\n' ){
+				if ( (res=gzgets(fin2, buffer2, MAX_LINE_SIZE)) == NULL ) break;
+				len2 = strlen( buffer2 );
+				len += len2;
+			}
+			offset = gztell( fin2 );
+			two.des_begin = offset - len;
+			two.tot_length += len;              // count first line
+			two.identifier = des.data;
+		} else {
+			one.tot_length += strlen(buffer);  one += buffer;
+			two.tot_length+= strlen(buffer2); two+= buffer2;
+		}
+	}
+	one.identifier = NULL;
+	two.identifier = NULL;
+	delete[] buffer;
+	gzclose( fin );
+	delete[] buffer2;
+	gzclose( fin2 );
 #else
-    bomb_error("this program was not compiled with zlib");
+	bomb_error("this program was not compiled with zlib");
 #endif
 
 }
@@ -2045,164 +2048,165 @@ void SequenceDB::Readgz( const char *file, const char *file2, const Options & op
 // PE reads liwz, disable swap option
 void SequenceDB::Read( const char *file, const char *file2, const Options & options )
 {
-    int f_len = strlen(file);
-    int f_len2= strlen(file2);
-    if (strcmp(file + f_len - 3, ".gz") == 0 ) {
-        if ( strcmp(file2 + f_len2 - 3, ".gz") ) bomb_error( "Both input files need to be in .gz format" );
-        Readgz(file, file2, options);
-        return;
-    }
+	int f_len = strlen(file);
+	int f_len2= strlen(file2);
+	if (strcmp(file + f_len - 3, ".gz") == 0 ) {
+		if ( strcmp(file2 + f_len2 - 3, ".gz") ) bomb_error( "Both input files need to be in .gz format" );
+		Readgz(file, file2, options);
+		return;
+	}
 
-    Sequence one, two;
-    Sequence des;
-    FILE *fin = fopen( file, "rb" );
-    FILE *fin2= fopen( file2,"rb" );
-    char *buffer = NULL;
-    char *buffer2= NULL;
-    char *res = NULL;
-    char *res2= NULL;
-    int option_l = options.min_length;
-    if( fin == NULL ) bomb_error( "Failed to open the database file" );
-    if( fin2== NULL ) bomb_error( "Failed to open the database file" );
-    Clear();
-    buffer = new char[ MAX_LINE_SIZE+1 ];
-    buffer2= new char[ MAX_LINE_SIZE+1 ];
+	Sequence one, two;
+	Sequence des;
+	FILE *fin = fopen( file, "rb" );
+	FILE *fin2= fopen( file2,"rb" );
+	char *buffer = NULL;
+	char *buffer2= NULL;
+	char *res = NULL;
+	char *res2= NULL;
+	int option_l = options.min_length;
+	if( fin == NULL ) bomb_error( "Failed to open the database file" );
+	if( fin2== NULL ) bomb_error( "Failed to open the database file" );
+	Clear();
+	buffer = new char[ MAX_LINE_SIZE+1 ];
+	buffer2= new char[ MAX_LINE_SIZE+1 ];
 
-    while (((not feof( fin )) && (not feof( fin2)) ) || (one.size && two.size)) { /* do not break when the last sequence is not handled */
-        buffer[0] = '>'; res =fgets( buffer,  MAX_LINE_SIZE, fin  );
-        buffer2[0]= '>'; res2=fgets( buffer2, MAX_LINE_SIZE, fin2 );
+	while (((not feof( fin )) && (not feof( fin2)) ) || (one.size && two.size)) { /* do not break when the last sequence is not handled */
+		buffer[0] = '>'; res =fgets( buffer,  MAX_LINE_SIZE, fin  );
+		buffer2[0]= '>'; res2=fgets( buffer2, MAX_LINE_SIZE, fin2 );
 
-        if ( (res      == NULL) && (res2     != NULL)) bomb_error( "Paired input files have different number sequences" );
-        if ( (res      != NULL) && (res2     == NULL)) bomb_error( "Paired input files have different number sequences" );
-        if ( (one.size == 0   ) && (two.size >     0)) bomb_error( "Paired input files have different number sequences" );
-        if ( (one.size >  0   ) && (two.size ==    0)) bomb_error( "Paired input files have different number sequences" );
-        if ( (res      == NULL) && (one.size ==    0)) break;
+		if ( (res      == NULL) && (res2     != NULL)) bomb_error( "Paired input files have different number sequences" );
+		if ( (res      != NULL) && (res2     == NULL)) bomb_error( "Paired input files have different number sequences" );
+		if ( (one.size == 0   ) && (two.size >     0)) bomb_error( "Paired input files have different number sequences" );
+		if ( (one.size >  0   ) && (two.size ==    0)) bomb_error( "Paired input files have different number sequences" );
+		if ( (res      == NULL) && (one.size ==    0)) break;
 
-        if( buffer[0] == '+' ){ // fastq 3rd line
-            // file 1
-            int len = strlen( buffer ); 
-            int len2 = len;
-            while( len2 && buffer[len2-1] != '\n' ){ // read until the end of the line
-                if ( (res=fgets( buffer, MAX_LINE_SIZE, fin )) == NULL ) break;
-                len2 = strlen( buffer );
-                len += len2;
-            }
-            one.tot_length += len;
+		if( buffer[0] == '+' ){ // fastq 3rd line
+			// file 1
+			int len = strlen( buffer ); 
+			int len2 = len;
+			while( len2 && buffer[len2-1] != '\n' ){ // read until the end of the line
+				if ( (res=fgets( buffer, MAX_LINE_SIZE, fin )) == NULL ) break;
+				len2 = strlen( buffer );
+				len += len2;
+			}
+			one.tot_length += len;
 
-            // read next line quality score
-            if ( (res=fgets( buffer, MAX_LINE_SIZE, fin )) == NULL ) bomb_error("can not read quality score after");
-            len = strlen( buffer );
-            len2 = len;
-            while( len2 && buffer[len2-1] != '\n' ){
-                if ( (res=fgets( buffer, MAX_LINE_SIZE, fin )) == NULL ) break;
-                len2 = strlen( buffer );
-                len += len2;
-            }
-            one.tot_length += len;
+			// read next line quality score
+			if ( (res=fgets( buffer, MAX_LINE_SIZE, fin )) == NULL ) bomb_error("can not read quality score after");
+			len = strlen( buffer );
+			len2 = len;
+			while( len2 && buffer[len2-1] != '\n' ){
+				if ( (res=fgets( buffer, MAX_LINE_SIZE, fin )) == NULL ) break;
+				len2 = strlen( buffer );
+				len += len2;
+			}
+			one.tot_length += len;
 
-            // file 2
-            len = strlen( buffer2 );
-            len2 = len;
-            while( len2 && buffer2[len2-1] != '\n' ){ // read until the end of the line
-                if ( (res2=fgets( buffer2, MAX_LINE_SIZE, fin2 )) == NULL ) break;
-                len2 = strlen( buffer2 );
-                len += len2;
-            }
-            two.tot_length += len;
+			// file 2
+			len = strlen( buffer2 );
+			len2 = len;
+			while( len2 && buffer2[len2-1] != '\n' ){ // read until the end of the line
+				if ( (res2=fgets( buffer2, MAX_LINE_SIZE, fin2 )) == NULL ) break;
+				len2 = strlen( buffer2 );
+				len += len2;
+			}
+			two.tot_length += len;
 
-            // read next line quality score
-            if ( (res2=fgets( buffer2, MAX_LINE_SIZE, fin2 )) == NULL ) bomb_error("can not read quality score after");
-            len = strlen( buffer2 );
-            len2 = len;
-            while( len2 && buffer2[len2-1] != '\n' ){
-                if ( (res2=fgets( buffer2, MAX_LINE_SIZE, fin2 )) == NULL ) break;
-                len2 = strlen( buffer2 );
-                len += len2;
-            }
-            two.tot_length += len;
+			// read next line quality score
+			if ( (res2=fgets( buffer2, MAX_LINE_SIZE, fin2 )) == NULL ) bomb_error("can not read quality score after");
+			len = strlen( buffer2 );
+			len2 = len;
+			while( len2 && buffer2[len2-1] != '\n' ){
+				if ( (res2=fgets( buffer2, MAX_LINE_SIZE, fin2 )) == NULL ) break;
+				len2 = strlen( buffer2 );
+				len += len2;
+			}
+			two.tot_length += len;
 
-        }else if (buffer[0] == '>' || buffer[0] == '@' || (res==NULL && one.size)) {
-            if ( one.size && two.size ) { // write previous record
-                if( one.identifier == NULL || one.Format() ){
-                    printf( "Warning: from file \"%s\",\n", file );
-                    printf( "Discarding invalid sequence or sequence without identifier and description!\n\n" );
-                    if( one.identifier ) printf( "%s\n", one.identifier );
-                    printf( "%s\n", one.data );
-                    one.size=0; two.size=0;
-                }
-                if( two.identifier == NULL || two.Format() ){
-                    printf( "Warning: from file \"%s\",\n", file2 );
-                    printf( "Discarding invalid sequence or sequence without identifier and description!\n\n" );
-                    if( two.identifier ) printf( "%s\n", two.identifier );
-                    printf( "%s\n", two.data );
-                    one.size=0; two.size = 0;
-                }
-                one.index = sequences.size();
-                if( (one.size + two.size)> option_l ) {
-                    if (options.trim_len    > 0) one.trim(options.trim_len);
-                    if (options.trim_len_R2 > 0) two.trim(options.trim_len_R2);
-                    sequences.Append( new Sequence( one, two, 1 ) ); 
-                }
-            }
-            // R1
-            one.size = 0;
-            one.tot_length = 0;
+		}else if (buffer[0] == '>' || buffer[0] == '@' || (res==NULL && one.size)) {
+			if ( one.size && two.size ) { // write previous record
+				if( one.identifier == NULL || one.Format() ){
+					printf( "Warning: from file \"%s\",\n", file );
+					printf( "Discarding invalid sequence or sequence without identifier and description!\n\n" );
+					if( one.identifier ) printf( "%s\n", one.identifier );
+					printf( "%s\n", one.data );
+					one.size=0; two.size=0;
+				}
+				if( two.identifier == NULL || two.Format() ){
+					printf( "Warning: from file \"%s\",\n", file2 );
+					printf( "Discarding invalid sequence or sequence without identifier and description!\n\n" );
+					if( two.identifier ) printf( "%s\n", two.identifier );
+					printf( "%s\n", two.data );
+					one.size=0; two.size = 0;
+				}
+				one.index = sequences.size();
+				if( (one.size + two.size)> option_l ) {
+					if (options.trim_len    > 0) one.trim(options.trim_len);
+					if (options.trim_len_R2 > 0) two.trim(options.trim_len_R2);
+					sequences.Append( new Sequence( one, two, 1 ) ); 
+				}
+			}
+			// R1
+			one.size = 0;
+			one.tot_length = 0;
 
-            int len = strlen( buffer );
-            int len2 = len;
-            des.size = 0;
-            des += buffer;
-            while( len2 && buffer[len2-1] != '\n' ){
-                if ( (res=fgets( buffer, MAX_LINE_SIZE, fin )) == NULL ) break;
-                des += buffer;
-                len2 = strlen( buffer );
-                len += len2;
-            }
-            size_t offset = ftell( fin );    
-            one.des_begin = offset - len; // offset of ">" or "@" 
-            one.tot_length += len;              // count first line
+			int len = strlen( buffer );
+			int len2 = len;
+			des.size = 0;
+			des += buffer;
+			while( len2 && buffer[len2-1] != '\n' ){
+				if ( (res=fgets( buffer, MAX_LINE_SIZE, fin )) == NULL ) break;
+				des += buffer;
+				len2 = strlen( buffer );
+				len += len2;
+			}
+			size_t offset = ftell( fin );    
+			one.des_begin = offset - len; // offset of ">" or "@" 
+			one.tot_length += len;              // count first line
 
-            int i = 0;
-            if( des.data[i] == '>' || des.data[i] == '@' || des.data[i] == '+' ) i += 1;
-            if( des.data[i] == ' ' or des.data[i] == '\t' ) i += 1;
-            if( options.des_len and options.des_len < des.size ) des.size = options.des_len;
-            while( i < des.size and ! isspace( des.data[i] ) ) i += 1;
-            des.data[i] = 0;                   // find first non-space letter
-            one.identifier = des.data;
+			int i = 0;
+			if( des.data[i] == '>' || des.data[i] == '@' || des.data[i] == '+' ) i += 1;
+			if( des.data[i] == ' ' or des.data[i] == '\t' ) i += 1;
+			if( options.des_len and options.des_len < des.size ) des.size = options.des_len;
+			while( i < des.size ) i += 1;
+			if(des.data[i - 1] == '\n') -- i;
+			des.data[i] = 0;
+			one.identifier = des.data;
 
-            // R2
-            two.size = 0;
-            two.tot_length = 0;
+			// R2
+			two.size = 0;
+			two.tot_length = 0;
 
-            len = strlen( buffer2 );
-            len2 = len;
-            while( len2 && buffer2[len2-1] != '\n' ){
-                if ( (res=fgets( buffer2, MAX_LINE_SIZE, fin2 )) == NULL ) break;
-                len2 = strlen( buffer2 );
-                len += len2;
-            }
-            offset = ftell( fin2 );
-            two.des_begin = offset - len;
-            two.tot_length += len;              // count first line
-            two.identifier = des.data;
-        } else {
-            one.tot_length += strlen(buffer);  one += buffer;
-            two.tot_length+= strlen(buffer2); two+= buffer2;
-        }
-    }
+			len = strlen( buffer2 );
+			len2 = len;
+			while( len2 && buffer2[len2-1] != '\n' ){
+				if ( (res=fgets( buffer2, MAX_LINE_SIZE, fin2 )) == NULL ) break;
+				len2 = strlen( buffer2 );
+				len += len2;
+			}
+			offset = ftell( fin2 );
+			two.des_begin = offset - len;
+			two.tot_length += len;              // count first line
+			two.identifier = des.data;
+		} else {
+			one.tot_length += strlen(buffer);  one += buffer;
+			two.tot_length+= strlen(buffer2); two+= buffer2;
+		}
+	}
 #if 0
-    int i, n = 0;
-    for(i=0; i<sequences.size(); i++) n += sequences[i].bufsize + 4;
-    cout<<n<<"\t"<<sequences.capacity() * sizeof(Sequence)<<endl;
-    int i;
-    scanf( "%i", & i );
+	int i, n = 0;
+	for(i=0; i<sequences.size(); i++) n += sequences[i].bufsize + 4;
+	cout<<n<<"\t"<<sequences.capacity() * sizeof(Sequence)<<endl;
+	int i;
+	scanf( "%i", & i );
 #endif
-    one.identifier = NULL;
-    two.identifier = NULL;
-    delete[] buffer;
-    fclose( fin );
-    delete[] buffer2;
-    fclose( fin2 );
+	one.identifier = NULL;
+	two.identifier = NULL;
+	delete[] buffer;
+	fclose( fin );
+	delete[] buffer2;
+	fclose( fin2 );
 }
 
 #if 0
@@ -2358,7 +2362,7 @@ void SequenceDB::DivideSave( const char *db, const char *newdb, int n, const Opt
 void SequenceDB::WriteClustersgz( const char *db, const char *newdb, const Options & options )
 {
 #ifdef WITH_ZLIB
-    gzFile fin = gzopen(db, "r");
+	gzFile fin = gzopen(db, "r");
 	FILE *fout = fopen( newdb, "w+" );
 	int i, j, n = rep_seqs.size();
 	int count, rest;
@@ -2387,18 +2391,18 @@ void SequenceDB::WriteClustersgz( const char *db, const char *newdb, const Optio
 	fclose( fout );
 	delete []buf;
 #else
-    bomb_error("this program was not compiled with zlib");
+	bomb_error("this program was not compiled with zlib");
 #endif
 
 }
 
 void SequenceDB::WriteClusters( const char *db, const char *newdb, const Options & options )
 {
-    int f_len = strlen(db);
-    if (strcmp(db + f_len - 3, ".gz") == 0 ) {
-        WriteClustersgz(db, newdb, options);
-        return;
-    }
+	int f_len = strlen(db);
+	if (strcmp(db + f_len - 3, ".gz") == 0 ) {
+		WriteClustersgz(db, newdb, options);
+		return;
+	}
 
 	FILE *fin = fopen( db, "rb" );
 	FILE *fout = fopen( newdb, "w+" );
@@ -2436,7 +2440,7 @@ void SequenceDB::WriteClusters( const char *db, const char *newdb, const Options
 void SequenceDB::WriteClustersgz( const char *db, const char *db_pe, const char *newdb, const char *newdb_pe, const Options & options )
 {
 #ifdef WITH_ZLIB
-    gzFile fin    = gzopen(db,    "r");
+	gzFile fin    = gzopen(db,    "r");
 	gzFile fin_pe = gzopen(db_pe, "r");
 	FILE *fout = fopen( newdb, "w+" );
 	FILE *fout_pe = fopen( newdb_pe, "w+" );
@@ -2449,31 +2453,31 @@ void SequenceDB::WriteClustersgz( const char *db, const char *db_pe, const char 
 	for (i=0; i<n; i++) sorting[i] = ((uint64_t)sequences[ rep_seqs[i] ]->index << 32) | rep_seqs[i];
 	std::sort( sorting.begin(), sorting.end() );
 
-        //sort fasta / fastq
-        int *clstr_size;
-        int *clstr_idx1;
-        if (options.sort_outputf) {
-            clstr_size = new int[n];
-            clstr_idx1 = new int[n];
-            for (i=0; i<n; i++) { 
-                clstr_size[i] = 0;
-                clstr_idx1[i]  = i;
-            }
+		//sort fasta / fastq
+		int *clstr_size;
+		int *clstr_idx1;
+		if (options.sort_outputf) {
+			clstr_size = new int[n];
+			clstr_idx1 = new int[n];
+			for (i=0; i<n; i++) { 
+				clstr_size[i] = 0;
+				clstr_idx1[i]  = i;
+			}
 
-            int N = sequences.size();
-            for (i=0; i<N; i++) { 
-                int id = sequences[i]->cluster_id;
-                if (id < 0) continue;
-                if (id >=n) continue;
-                clstr_size[id]++;
-            }
-            quick_sort_idxr(clstr_size, clstr_idx1, 0, n-1);
-        }
+			int N = sequences.size();
+			for (i=0; i<N; i++) { 
+				int id = sequences[i]->cluster_id;
+				if (id < 0) continue;
+				if (id >=n) continue;
+				clstr_size[id]++;
+			}
+			quick_sort_idxr(clstr_size, clstr_idx1, 0, n-1);
+		}
 
 	for (i=0; i<n; i++){
 		Sequence *seq = sequences[ sorting[i] & 0xffffffff ];
-                if (options.sort_outputf) seq = sequences[  rep_seqs[ clstr_idx1[i] ] ];
-                //R1
+				if (options.sort_outputf) seq = sequences[  rep_seqs[ clstr_idx1[i] ] ];
+				//R1
 		gzseek( fin, seq->des_begin, SEEK_SET );
 
 		count = seq->tot_length / MAX_LINE_SIZE;
@@ -2488,7 +2492,7 @@ void SequenceDB::WriteClustersgz( const char *db, const char *db_pe, const char 
 			fwrite( buf, 1, rest, fout );
 		}
 
-                //R2
+				//R2
 		gzseek( fin_pe, seq->des_begin2, SEEK_SET );
 
 		count = seq->tot_length2 / MAX_LINE_SIZE;
@@ -2510,7 +2514,7 @@ void SequenceDB::WriteClustersgz( const char *db, const char *db_pe, const char 
 	fclose( fout_pe );
 	delete []buf;
 #else
-    bomb_error("this program was not compiled with zlib");
+	bomb_error("this program was not compiled with zlib");
 #endif
 }
 
@@ -2518,11 +2522,11 @@ void SequenceDB::WriteClustersgz( const char *db, const char *db_pe, const char 
 // liwz PE output
 void SequenceDB::WriteClusters( const char *db, const char *db_pe, const char *newdb, const char *newdb_pe, const Options & options )
 {
-    int f_len = strlen(db); 
-    if (strcmp(db + f_len - 3, ".gz") == 0 ) {
-        WriteClustersgz(db, db_pe, newdb, newdb_pe, options);
-        return;
-    }
+	int f_len = strlen(db); 
+	if (strcmp(db + f_len - 3, ".gz") == 0 ) {
+		WriteClustersgz(db, db_pe, newdb, newdb_pe, options);
+		return;
+	}
 
 	FILE *fin = fopen( db, "rb" );
 	FILE *fout = fopen( newdb, "w+" );
@@ -2537,31 +2541,31 @@ void SequenceDB::WriteClusters( const char *db, const char *db_pe, const char *n
 	for (i=0; i<n; i++) sorting[i] = ((uint64_t)sequences[ rep_seqs[i] ]->index << 32) | rep_seqs[i];
 	std::sort( sorting.begin(), sorting.end() );
 
-        //sort fasta / fastq
-        int *clstr_size;
-        int *clstr_idx1;
-        if (options.sort_outputf) {
-            clstr_size = new int[n];
-            clstr_idx1 = new int[n];
-            for (i=0; i<n; i++) { 
-                clstr_size[i] = 0;
-                clstr_idx1[i]  = i;
-            }
+		//sort fasta / fastq
+		int *clstr_size;
+		int *clstr_idx1;
+		if (options.sort_outputf) {
+			clstr_size = new int[n];
+			clstr_idx1 = new int[n];
+			for (i=0; i<n; i++) { 
+				clstr_size[i] = 0;
+				clstr_idx1[i]  = i;
+			}
 
-            int N = sequences.size();
-            for (i=0; i<N; i++) { 
-                int id = sequences[i]->cluster_id;
-                if (id < 0) continue;
-                if (id >=n) continue;
-                clstr_size[id]++;
-            }
-            quick_sort_idxr(clstr_size, clstr_idx1, 0, n-1);
-        }
+			int N = sequences.size();
+			for (i=0; i<N; i++) { 
+				int id = sequences[i]->cluster_id;
+				if (id < 0) continue;
+				if (id >=n) continue;
+				clstr_size[id]++;
+			}
+			quick_sort_idxr(clstr_size, clstr_idx1, 0, n-1);
+		}
 
 	for (i=0; i<n; i++){
 		Sequence *seq = sequences[ sorting[i] & 0xffffffff ];
-                if (options.sort_outputf) seq = sequences[  rep_seqs[ clstr_idx1[i] ] ];
-                //R1
+				if (options.sort_outputf) seq = sequences[  rep_seqs[ clstr_idx1[i] ] ];
+				//R1
 		fseek( fin, seq->des_begin, SEEK_SET );
 
 		count = seq->tot_length / MAX_LINE_SIZE;
@@ -2576,7 +2580,7 @@ void SequenceDB::WriteClusters( const char *db, const char *db_pe, const char *n
 			fwrite( buf, 1, rest, fout );
 		}
 
-                //R2
+				//R2
 		fseek( fin_pe, seq->des_begin2, SEEK_SET );
 
 		count = seq->tot_length2 / MAX_LINE_SIZE;
@@ -2623,34 +2627,43 @@ void SequenceDB::WriteExtra1D( const Options & options )
 		clusters[id].Append( k );
 	}
 
-	// fout = fopen( db_clstr.c_str(), "w+" );
+	fout = fopen( "tmp", "w" );
+	fprintf(fout, "%d\n", M);
+	fclose(fout);
 
-    if (options.sort_output) 
+	if (options.sort_output) 
 	{
-            int *clstr_size = new int[M];
-            int *clstr_idx1 = new int[M];
+		int *clstr_size = new int[M];
+		int *clstr_idx1 = new int[M];
+		for (i=0; i<M; i++) { 
+			clstr_size[i] = (int)clusters[i].size();
+			clstr_idx1[i]  = i;
+		}
+		quick_sort_idxr(clstr_size, clstr_idx1, 0, M-1);
 
-            for (i=0; i<M; i++) { 
-                clstr_size[i] = (int)clusters[i].size();
-                clstr_idx1[i]  = i;
-            }
-            quick_sort_idxr(clstr_size, clstr_idx1, 0, M-1);
-
-  	    for (i=0; i<M; i++) 
+  		for (i=0; i<M; i++) 
 		{
 			fout = fopen( (db_clstr + "_" + to_string(i) + ".clstr").c_str(), "w");
-            i0 = clstr_idx1[i];
+			i0 = clstr_idx1[i];
 			// fprintf( fout, ">Cluster %i\n", i );
 			for (k=0; k<(int)clusters[i0].size(); k++) 
 			{
 				sequences[ clusters[i0][k] ]->PrintInfo( k, fout, options, buf );
 			}
 			fclose(fout);
+			// write to a center
+			fout = fopen( (db_clstr + "_" + to_string(i) + ".center").c_str(), "w" );
+			sequences[rep_seqs[i0]] -> PrintInfo(i0, fout, options, buf);
+			fclose(fout);
+			// write to db
+			fout = fopen( db_clstr.c_str(), "a+" );
+			sequences[rep_seqs[i0]] -> PrintInfo(i0, fout, options, buf);
+			fclose(fout);
 		}
-    }
-    else
+	}
+	else
 	{
-  	    for (i=0; i<M; i++)
+  		for (i=0; i<M; i++)
 		{
 			fout = fopen( (db_clstr + "_" + to_string(i) + ".clstr").c_str(), "w");
 			// fprintf( fout, ">Cluster %i\n", i );
@@ -2659,9 +2672,17 @@ void SequenceDB::WriteExtra1D( const Options & options )
 				sequences[ clusters[i][k] ]->PrintInfo( k, fout, options, buf );
 	  		} 
 			fclose(fout);
+			// write to a center
+			fout = fopen( (db_clstr + "_" + to_string(i) + ".center").c_str(), "w" );
+			sequences[rep_seqs[i]] -> PrintInfo(i0, fout, options, buf);
+			fclose(fout);
+			// write to db
+			fout = fopen( db_clstr.c_str(), "a+" );
+			sequences[rep_seqs[i]] -> PrintInfo(i0, fout, options, buf);
+			fclose(fout);
 		}  
 
-    }
+	}
 
 	delete []buf;
 }
@@ -3285,9 +3306,9 @@ int SequenceDB::CheckOneAA( Sequence *seq, WordTable & table, WorkingParam & par
 		}
 	}
 
-    //liwz 2016 01, seq is too short for the shortest (longer) seq in word_table to satisfy -aL option
-    //longer seqeunce * -aL -band_width
-    if ( S ) {
+	//liwz 2016 01, seq is too short for the shortest (longer) seq in word_table to satisfy -aL option
+	//longer seqeunce * -aL -band_width
+	if ( S ) {
 		int min = table.sequences[S-1]->size;
 		int min_red = min * options.long_coverage - options.band_width;
 		if (len < min_red) return 0; // return flag=0
@@ -3453,9 +3474,9 @@ int SequenceDB::CheckOneEST( Sequence *seq, WordTable & table, WorkingParam & pa
 	}
 
 
-        //liwz 2016 01, seq is too short for the shortest (longer) seq in word_table to satisfy -aL option
-        //longer seqeunce * -aL -band_width
-        if ( S ) {
+		//liwz 2016 01, seq is too short for the shortest (longer) seq in word_table to satisfy -aL option
+		//longer seqeunce * -aL -band_width
+		if ( S ) {
 		int min = table.sequences[S-1]->size;
 		int min_red = min * options.long_coverage - options.band_width;
 		if (len < min_red) return 0; // return flag=0
@@ -4042,20 +4063,20 @@ int quick_sort_idx (int *a, int *idx, int lo0, int hi0 ) {
   int tmp;
 
   if ( hi0 > lo0) {
-    mid = a[ ( lo0 + hi0 ) / 2 ];
+	mid = a[ ( lo0 + hi0 ) / 2 ];
 
-    while( lo <= hi ) {
-      while( ( lo < hi0 ) && ( a[lo] < mid ) ) lo++;
-      while( ( hi > lo0 ) && ( a[hi] > mid ) ) hi--;
-      if( lo <= hi ) {
-        tmp=a[lo];   a[lo]=a[hi];     a[hi]=tmp;
-        tmp=idx[lo]; idx[lo]=idx[hi]; idx[hi]=tmp;
-        lo++; hi--;
-      }
-    } // while
+	while( lo <= hi ) {
+	  while( ( lo < hi0 ) && ( a[lo] < mid ) ) lo++;
+	  while( ( hi > lo0 ) && ( a[hi] > mid ) ) hi--;
+	  if( lo <= hi ) {
+		tmp=a[lo];   a[lo]=a[hi];     a[hi]=tmp;
+		tmp=idx[lo]; idx[lo]=idx[hi]; idx[hi]=tmp;
+		lo++; hi--;
+	  }
+	} // while
 
-    if( lo0 < hi ) quick_sort_idx(a, idx, lo0, hi );
-    if( lo < hi0 ) quick_sort_idx(a, idx, lo, hi0 );
+	if( lo0 < hi ) quick_sort_idx(a, idx, lo0, hi );
+	if( lo < hi0 ) quick_sort_idx(a, idx, lo, hi0 );
   } // if ( hi0 > lo0)
   return 0;
 } // quick_sort_idx
@@ -4072,20 +4093,20 @@ int quick_sort_idxr (int *a, int *idx, int lo0, int hi0 ) {
   int tmp;
 
   if ( hi0 > lo0) {
-    mid = a[ ( lo0 + hi0 ) / 2 ];
+	mid = a[ ( lo0 + hi0 ) / 2 ];
 
-    while( lo <= hi ) {
-      while( ( lo < hi0 ) && ( a[lo] > mid ) ) lo++;
-      while( ( hi > lo0 ) && ( a[hi] < mid ) ) hi--;
-      if( lo <= hi ) {
-        tmp=a[lo];   a[lo]=a[hi];     a[hi]=tmp;
-        tmp=idx[lo]; idx[lo]=idx[hi]; idx[hi]=tmp;
-        lo++; hi--;
-      }
-    } // while
+	while( lo <= hi ) {
+	  while( ( lo < hi0 ) && ( a[lo] > mid ) ) lo++;
+	  while( ( hi > lo0 ) && ( a[hi] < mid ) ) hi--;
+	  if( lo <= hi ) {
+		tmp=a[lo];   a[lo]=a[hi];     a[hi]=tmp;
+		tmp=idx[lo]; idx[lo]=idx[hi]; idx[hi]=tmp;
+		lo++; hi--;
+	  }
+	} // while
 
-    if( lo0 < hi ) quick_sort_idxr(a, idx, lo0, hi );
-    if( lo < hi0 ) quick_sort_idxr(a, idx, lo, hi0 );
+	if( lo0 < hi ) quick_sort_idxr(a, idx, lo0, hi );
+	if( lo < hi0 ) quick_sort_idxr(a, idx, lo, hi0 );
   } // if ( hi0 > lo0)
   return 0;
 } // quick_sort_idxr

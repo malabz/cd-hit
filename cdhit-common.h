@@ -43,7 +43,7 @@
 #include<vector>
 #include<map>
 
-#define CDHIT_VERSION  "5.0"
+#define CDHIT_VERSION  "5.0.2"
 
 #ifndef MAX_SEQ
 #define MAX_SEQ 655360
@@ -344,7 +344,7 @@ struct Options
 		print = 0;
 		option_r  = 1;
 		frag_size = 0;
-		des_len = 20;
+		des_len = 1000;
 		threads = 1;
         PE_mode = 0;
         trim_len = 0;
