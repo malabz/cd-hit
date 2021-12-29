@@ -1,7 +1,10 @@
 
 CD-HIT ChangeLog
 
-CD-HIT-V5.0 (2021-07-12) modified by wym6912:
+CD-HIT-V5.0.3 (2021-12-29) modified by wym6912:
+Add -std=c++11 on compling files
+
+CD-HIT-V5.0.2 (2021-07-12) modified by wym6912:
 Now the program has the modules: cd-hit, cd-hit-est, cd-hit-454
 
 CD-HIT-V4.8.1 (2019-03-01):

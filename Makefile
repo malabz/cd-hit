@@ -12,6 +12,9 @@ else
   CCFLAGS = -fopenmp
 endif
 
+# prevent `to_string` complie error
+CCFLAGS += -std=c++11
+
 #LDFLAGS = -static -lz -o
 #LDFLAGS = /usr/lib/x86_64-linux-gnu/libz.a -o
 
